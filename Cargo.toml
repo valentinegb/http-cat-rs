@@ -6,7 +6,7 @@ edition = "2021"
 description = "Rust wrapper around http.cat"
 repository = "https://github.com/valentinegb/http-cat-rs"
 license = "MIT"
-keywords = ["cat", "silly"]
+keywords = ["cat", "cats", "silly"]
 categories = ["api-bindings"]
 
 [dependencies]
