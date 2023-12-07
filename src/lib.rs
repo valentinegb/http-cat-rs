@@ -97,118 +97,114 @@ impl HttpCat {
     }
 }
 
+impl TryFrom<u16> for HttpCat {
+    type Error = String;
+
+    fn try_from(value: u16) -> Result<Self, Self::Error> {
+        match value {
+            v if HttpCat::Continue as u16 == v => Ok(HttpCat::Continue),
+            v if HttpCat::SwitchingProtocols as u16 == v => Ok(HttpCat::SwitchingProtocols),
+            v if HttpCat::Processing as u16 == v => Ok(HttpCat::Processing),
+            v if HttpCat::EarlyHints as u16 == v => Ok(HttpCat::EarlyHints),
+            v if HttpCat::Ok as u16 == v => Ok(HttpCat::Ok),
+            v if HttpCat::Created as u16 == v => Ok(HttpCat::Created),
+            v if HttpCat::Accepted as u16 == v => Ok(HttpCat::Accepted),
+            v if HttpCat::NonAuthoritativeInformation as u16 == v => {
+                Ok(HttpCat::NonAuthoritativeInformation)
+            }
+            v if HttpCat::NoContent as u16 == v => Ok(HttpCat::NoContent),
+            v if HttpCat::ResetContent as u16 == v => Ok(HttpCat::ResetContent),
+            v if HttpCat::PartialContent as u16 == v => Ok(HttpCat::PartialContent),
+            v if HttpCat::MultiStatus as u16 == v => Ok(HttpCat::MultiStatus),
+            v if HttpCat::AlreadyReported as u16 == v => Ok(HttpCat::AlreadyReported),
+            v if HttpCat::ImUsed as u16 == v => Ok(HttpCat::ImUsed),
+            v if HttpCat::MultipleChoices as u16 == v => Ok(HttpCat::MultipleChoices),
+            v if HttpCat::MovedPermanently as u16 == v => Ok(HttpCat::MovedPermanently),
+            v if HttpCat::Found as u16 == v => Ok(HttpCat::Found),
+            v if HttpCat::SeeOther as u16 == v => Ok(HttpCat::SeeOther),
+            v if HttpCat::NotModified as u16 == v => Ok(HttpCat::NotModified),
+            v if HttpCat::UseProxy as u16 == v => Ok(HttpCat::UseProxy),
+            v if HttpCat::TemporaryRedirect as u16 == v => Ok(HttpCat::TemporaryRedirect),
+            v if HttpCat::PermanentRedirect as u16 == v => Ok(HttpCat::PermanentRedirect),
+            v if HttpCat::BadRequest as u16 == v => Ok(HttpCat::BadRequest),
+            v if HttpCat::Unauthorized as u16 == v => Ok(HttpCat::Unauthorized),
+            v if HttpCat::PaymentRequired as u16 == v => Ok(HttpCat::PaymentRequired),
+            v if HttpCat::Forbidden as u16 == v => Ok(HttpCat::Forbidden),
+            v if HttpCat::NotFound as u16 == v => Ok(HttpCat::NotFound),
+            v if HttpCat::MethodNotAllowed as u16 == v => Ok(HttpCat::MethodNotAllowed),
+            v if HttpCat::NotAcceptable as u16 == v => Ok(HttpCat::NotAcceptable),
+            v if HttpCat::ProxyAuthenticationRequired as u16 == v => {
+                Ok(HttpCat::ProxyAuthenticationRequired)
+            }
+            v if HttpCat::RequestTimeout as u16 == v => Ok(HttpCat::RequestTimeout),
+            v if HttpCat::Conflict as u16 == v => Ok(HttpCat::Conflict),
+            v if HttpCat::Gone as u16 == v => Ok(HttpCat::Gone),
+            v if HttpCat::LengthRequired as u16 == v => Ok(HttpCat::LengthRequired),
+            v if HttpCat::PreconditionFailed as u16 == v => Ok(HttpCat::PreconditionFailed),
+            v if HttpCat::PayloadTooLarge as u16 == v => Ok(HttpCat::PayloadTooLarge),
+            v if HttpCat::RequestUriTooLong as u16 == v => Ok(HttpCat::RequestUriTooLong),
+            v if HttpCat::UnsupportedMediaType as u16 == v => Ok(HttpCat::UnsupportedMediaType),
+            v if HttpCat::RequestRangeNotSatisfiable as u16 == v => {
+                Ok(HttpCat::RequestRangeNotSatisfiable)
+            }
+            v if HttpCat::ExpectationFailed as u16 == v => Ok(HttpCat::ExpectationFailed),
+            v if HttpCat::ImATeapot as u16 == v => Ok(HttpCat::ImATeapot),
+            v if HttpCat::EnhanceYourCalm as u16 == v => Ok(HttpCat::EnhanceYourCalm),
+            v if HttpCat::MisdirectedRequest as u16 == v => Ok(HttpCat::MisdirectedRequest),
+            v if HttpCat::UnprocessableEntity as u16 == v => Ok(HttpCat::UnprocessableEntity),
+            v if HttpCat::Locked as u16 == v => Ok(HttpCat::Locked),
+            v if HttpCat::FailedDependency as u16 == v => Ok(HttpCat::FailedDependency),
+            v if HttpCat::TooEarly as u16 == v => Ok(HttpCat::TooEarly),
+            v if HttpCat::UpgradeRequired as u16 == v => Ok(HttpCat::UpgradeRequired),
+            v if HttpCat::PreconditionRequired as u16 == v => Ok(HttpCat::PreconditionRequired),
+            v if HttpCat::TooManyRequests as u16 == v => Ok(HttpCat::TooManyRequests),
+            v if HttpCat::RequestHeaderFieldsTooLarge as u16 == v => {
+                Ok(HttpCat::RequestHeaderFieldsTooLarge)
+            }
+            v if HttpCat::NoResponse as u16 == v => Ok(HttpCat::NoResponse),
+            v if HttpCat::BlockedByWindowsParentalControls as u16 == v => {
+                Ok(HttpCat::BlockedByWindowsParentalControls)
+            }
+            v if HttpCat::UnavailableForLegalReasons as u16 == v => {
+                Ok(HttpCat::UnavailableForLegalReasons)
+            }
+            v if HttpCat::HttpRequestSentToHttpsPort as u16 == v => {
+                Ok(HttpCat::HttpRequestSentToHttpsPort)
+            }
+            v if HttpCat::TokenExpiredInvalid as u16 == v => Ok(HttpCat::TokenExpiredInvalid),
+            v if HttpCat::ClientClosedRequest as u16 == v => Ok(HttpCat::ClientClosedRequest),
+            v if HttpCat::InternalServerError as u16 == v => Ok(HttpCat::InternalServerError),
+            v if HttpCat::NotImplemented as u16 == v => Ok(HttpCat::NotImplemented),
+            v if HttpCat::BadGateway as u16 == v => Ok(HttpCat::BadGateway),
+            v if HttpCat::ServiceUnavailable as u16 == v => Ok(HttpCat::ServiceUnavailable),
+            v if HttpCat::GatewayTimeout as u16 == v => Ok(HttpCat::GatewayTimeout),
+            v if HttpCat::VariantAlsoNegotiates as u16 == v => Ok(HttpCat::VariantAlsoNegotiates),
+            v if HttpCat::InsufficientStorage as u16 == v => Ok(HttpCat::InsufficientStorage),
+            v if HttpCat::LoopDetected as u16 == v => Ok(HttpCat::LoopDetected),
+            v if HttpCat::BandwidthLimitExceeded as u16 == v => Ok(HttpCat::BandwidthLimitExceeded),
+            v if HttpCat::NotExtended as u16 == v => Ok(HttpCat::NotExtended),
+            v if HttpCat::NetworkAuthenticationRequired as u16 == v => {
+                Ok(HttpCat::NetworkAuthenticationRequired)
+            }
+            v if HttpCat::WebServerIsDown as u16 == v => Ok(HttpCat::WebServerIsDown),
+            v if HttpCat::ConnectionTimedOut as u16 == v => Ok(HttpCat::ConnectionTimedOut),
+            v if HttpCat::OriginIsUnreachable as u16 == v => Ok(HttpCat::OriginIsUnreachable),
+            v if HttpCat::SslHandshakeFailed as u16 == v => Ok(HttpCat::SslHandshakeFailed),
+            v if HttpCat::SiteFrozen as u16 == v => Ok(HttpCat::SiteFrozen),
+            v if HttpCat::NetworkConnectTimeoutError as u16 == v => {
+                Ok(HttpCat::NetworkConnectTimeoutError)
+            }
+            other => Err(format!("status code \"{other}\" is unimplemented")),
+        }
+    }
+}
+
 #[cfg(feature = "http")]
 impl TryFrom<http::StatusCode> for HttpCat {
     type Error = String;
 
     fn try_from(value: http::StatusCode) -> Result<Self, Self::Error> {
-        match value {
-            http::StatusCode::CONTINUE => Ok(HttpCat::Continue),
-            http::StatusCode::SWITCHING_PROTOCOLS => Ok(HttpCat::SwitchingProtocols),
-            http::StatusCode::PROCESSING => Ok(HttpCat::Processing),
-            v if v.as_u16() == HttpCat::EarlyHints as u16 => Ok(HttpCat::EarlyHints),
-            http::StatusCode::OK => Ok(HttpCat::Ok),
-            http::StatusCode::CREATED => Ok(HttpCat::Created),
-            http::StatusCode::ACCEPTED => Ok(HttpCat::Accepted),
-            http::StatusCode::NON_AUTHORITATIVE_INFORMATION => {
-                Ok(HttpCat::NonAuthoritativeInformation)
-            }
-            http::StatusCode::NO_CONTENT => Ok(HttpCat::NoContent),
-            http::StatusCode::RESET_CONTENT => Ok(HttpCat::ResetContent),
-            http::StatusCode::PARTIAL_CONTENT => Ok(HttpCat::PartialContent),
-            http::StatusCode::MULTI_STATUS => Ok(HttpCat::MultiStatus),
-            http::StatusCode::ALREADY_REPORTED => Ok(HttpCat::AlreadyReported),
-            http::StatusCode::IM_USED => Ok(HttpCat::ImUsed),
-            http::StatusCode::MULTIPLE_CHOICES => Ok(HttpCat::MultipleChoices),
-            http::StatusCode::MOVED_PERMANENTLY => Ok(HttpCat::MovedPermanently),
-            http::StatusCode::FOUND => Ok(HttpCat::Found),
-            http::StatusCode::SEE_OTHER => Ok(HttpCat::SeeOther),
-            http::StatusCode::NOT_MODIFIED => Ok(HttpCat::NotModified),
-            http::StatusCode::USE_PROXY => Ok(HttpCat::UseProxy),
-            http::StatusCode::TEMPORARY_REDIRECT => Ok(HttpCat::TemporaryRedirect),
-            http::StatusCode::PERMANENT_REDIRECT => Ok(HttpCat::PermanentRedirect),
-            http::StatusCode::BAD_REQUEST => Ok(HttpCat::BadRequest),
-            http::StatusCode::UNAUTHORIZED => Ok(HttpCat::Unauthorized),
-            http::StatusCode::PAYMENT_REQUIRED => Ok(HttpCat::PaymentRequired),
-            http::StatusCode::FORBIDDEN => Ok(HttpCat::Forbidden),
-            http::StatusCode::NOT_FOUND => Ok(HttpCat::NotFound),
-            http::StatusCode::METHOD_NOT_ALLOWED => Ok(HttpCat::MethodNotAllowed),
-            http::StatusCode::NOT_ACCEPTABLE => Ok(HttpCat::NotAcceptable),
-            http::StatusCode::PROXY_AUTHENTICATION_REQUIRED => {
-                Ok(HttpCat::ProxyAuthenticationRequired)
-            }
-            http::StatusCode::REQUEST_TIMEOUT => Ok(HttpCat::RequestTimeout),
-            http::StatusCode::CONFLICT => Ok(HttpCat::Conflict),
-            http::StatusCode::GONE => Ok(HttpCat::Gone),
-            http::StatusCode::LENGTH_REQUIRED => Ok(HttpCat::LengthRequired),
-            http::StatusCode::PRECONDITION_FAILED => Ok(HttpCat::PreconditionFailed),
-            http::StatusCode::PAYLOAD_TOO_LARGE => Ok(HttpCat::PayloadTooLarge),
-            v if v.as_u16() == HttpCat::RequestUriTooLong as u16 => Ok(HttpCat::RequestUriTooLong),
-            http::StatusCode::UNSUPPORTED_MEDIA_TYPE => Ok(HttpCat::UnsupportedMediaType),
-            v if v.as_u16() == HttpCat::RequestRangeNotSatisfiable as u16 => {
-                Ok(HttpCat::RequestRangeNotSatisfiable)
-            }
-            http::StatusCode::EXPECTATION_FAILED => Ok(HttpCat::ExpectationFailed),
-            http::StatusCode::IM_A_TEAPOT => Ok(HttpCat::ImATeapot),
-            v if v.as_u16() == HttpCat::EnhanceYourCalm as u16 => Ok(HttpCat::EnhanceYourCalm),
-            http::StatusCode::MISDIRECTED_REQUEST => Ok(HttpCat::MisdirectedRequest),
-            http::StatusCode::UNPROCESSABLE_ENTITY => Ok(HttpCat::UnprocessableEntity),
-            http::StatusCode::LOCKED => Ok(HttpCat::Locked),
-            http::StatusCode::FAILED_DEPENDENCY => Ok(HttpCat::FailedDependency),
-            v if v.as_u16() == HttpCat::TooEarly as u16 => Ok(HttpCat::TooEarly),
-            http::StatusCode::UPGRADE_REQUIRED => Ok(HttpCat::UpgradeRequired),
-            http::StatusCode::PRECONDITION_REQUIRED => Ok(HttpCat::PreconditionRequired),
-            http::StatusCode::TOO_MANY_REQUESTS => Ok(HttpCat::TooManyRequests),
-            http::StatusCode::REQUEST_HEADER_FIELDS_TOO_LARGE => {
-                Ok(HttpCat::RequestHeaderFieldsTooLarge)
-            }
-            v if v.as_u16() == HttpCat::NoResponse as u16 => Ok(HttpCat::NoResponse),
-            v if v.as_u16() == HttpCat::BlockedByWindowsParentalControls as u16 => {
-                Ok(HttpCat::BlockedByWindowsParentalControls)
-            }
-            http::StatusCode::UNAVAILABLE_FOR_LEGAL_REASONS => {
-                Ok(HttpCat::UnavailableForLegalReasons)
-            }
-            v if v.as_u16() == HttpCat::HttpRequestSentToHttpsPort as u16 => {
-                Ok(HttpCat::HttpRequestSentToHttpsPort)
-            }
-            v if v.as_u16() == HttpCat::TokenExpiredInvalid as u16 => {
-                Ok(HttpCat::TokenExpiredInvalid)
-            }
-            v if v.as_u16() == HttpCat::ClientClosedRequest as u16 => {
-                Ok(HttpCat::ClientClosedRequest)
-            }
-            http::StatusCode::INTERNAL_SERVER_ERROR => Ok(HttpCat::InternalServerError),
-            http::StatusCode::NOT_IMPLEMENTED => Ok(HttpCat::NotImplemented),
-            http::StatusCode::BAD_GATEWAY => Ok(HttpCat::BadGateway),
-            http::StatusCode::SERVICE_UNAVAILABLE => Ok(HttpCat::ServiceUnavailable),
-            http::StatusCode::GATEWAY_TIMEOUT => Ok(HttpCat::GatewayTimeout),
-            http::StatusCode::VARIANT_ALSO_NEGOTIATES => Ok(HttpCat::VariantAlsoNegotiates),
-            http::StatusCode::INSUFFICIENT_STORAGE => Ok(HttpCat::InsufficientStorage),
-            http::StatusCode::LOOP_DETECTED => Ok(HttpCat::LoopDetected),
-            v if v.as_u16() == HttpCat::BandwidthLimitExceeded as u16 => {
-                Ok(HttpCat::BandwidthLimitExceeded)
-            }
-            http::StatusCode::NOT_EXTENDED => Ok(HttpCat::NotExtended),
-            http::StatusCode::NETWORK_AUTHENTICATION_REQUIRED => {
-                Ok(HttpCat::NetworkAuthenticationRequired)
-            }
-            v if v.as_u16() == HttpCat::WebServerIsDown as u16 => Ok(HttpCat::WebServerIsDown),
-            v if v.as_u16() == HttpCat::ConnectionTimedOut as u16 => {
-                Ok(HttpCat::ConnectionTimedOut)
-            }
-            v if v.as_u16() == HttpCat::OriginIsUnreachable as u16 => {
-                Ok(HttpCat::OriginIsUnreachable)
-            }
-            v if v.as_u16() == HttpCat::SslHandshakeFailed as u16 => {
-                Ok(HttpCat::SslHandshakeFailed)
-            }
-            v if v.as_u16() == HttpCat::SiteFrozen as u16 => Ok(HttpCat::SiteFrozen),
-            v if v.as_u16() == HttpCat::NetworkConnectTimeoutError as u16 => {
-                Ok(HttpCat::NetworkConnectTimeoutError)
-            }
-            other => Err(format!("status code \"{other}\" is unimplemented")),
-        }
+        HttpCat::try_from(value.as_u16())
     }
 }
 
