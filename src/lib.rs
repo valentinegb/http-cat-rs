@@ -1,3 +1,8 @@
+use std::io::Cursor;
+
+use image::{DynamicImage, ImageError, ImageFormat};
+use thiserror::Error;
+
 #[repr(u16)]
 pub enum HttpCat {
     Continue = 100,
@@ -76,12 +81,25 @@ pub enum HttpCat {
     NetworkConnectTimeoutError = 599,
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+impl HttpCat {
+    pub async fn get(self) -> Result<DynamicImage, Error> {
+        let mut image = image::io::Reader::new(Cursor::new(
+            reqwest::get(format!("https://http.cat/{}", self as u16))
+                .await?
+                .bytes()
+                .await?,
+        ));
 
-    #[test]
-    fn status_to_code() {
-        assert_eq!(HttpCat::ImATeapot as u16, 418);
+        image.set_format(ImageFormat::Jpeg);
+
+        Ok(image.decode()?)
     }
+}
+
+#[derive(Error, Debug)]
+pub enum Error {
+    #[error(transparent)]
+    Reqwest(#[from] reqwest::Error),
+    #[error(transparent)]
+    Image(#[from] ImageError),
 }
