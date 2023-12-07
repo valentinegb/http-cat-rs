@@ -30,3 +30,14 @@ fn dep_http() {
         HttpCat::ImATeapot,
     );
 }
+
+#[cfg(feature = "rocket")]
+#[test]
+fn dep_rocket() {
+    use rocket::http::Status;
+
+    assert_eq!(
+        HttpCat::try_from(Status::ImATeapot).unwrap(),
+        HttpCat::ImATeapot,
+    );
+}

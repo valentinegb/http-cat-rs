@@ -201,10 +201,19 @@ impl TryFrom<u16> for HttpCat {
 
 #[cfg(feature = "http")]
 impl TryFrom<http::StatusCode> for HttpCat {
-    type Error = String;
+    type Error = <Self as TryFrom<u16>>::Error;
 
     fn try_from(value: http::StatusCode) -> Result<Self, Self::Error> {
         HttpCat::try_from(value.as_u16())
+    }
+}
+
+#[cfg(feature = "rocket")]
+impl TryFrom<rocket::http::Status> for HttpCat {
+    type Error = <Self as TryFrom<u16>>::Error;
+
+    fn try_from(value: rocket::http::Status) -> Result<Self, Self::Error> {
+        HttpCat::try_from(value.code)
     }
 }
 
