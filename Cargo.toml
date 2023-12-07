@@ -1,7 +1,12 @@
 [package]
 name = "http_cat"
 version = "0.1.0"
+authors = ["Valentine Briese <valentinegb@icloud.com"]
 edition = "2021"
+description = "Rust wrapper around http.cat"
+repository = "https://github.com/valentinegb/http-cat-rs"
+license = "MIT"
+categories = ["api-bindings"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
