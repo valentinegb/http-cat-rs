@@ -1,3 +1,4 @@
+#[repr(u16)]
 pub enum HttpCat {
     Continue = 100,
     SwitchingProtocols,
@@ -73,4 +74,14 @@ pub enum HttpCat {
     SslHandshakeFailed = 525,
     SiteFrozen = 530,
     NetworkConnectTimeoutError = 599,
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn status_to_code() {
+        assert_eq!(HttpCat::ImATeapot as u16, 418);
+    }
 }
