@@ -19,3 +19,14 @@ async fn image() {
         test_image.decode().unwrap(),
     );
 }
+
+#[cfg(feature = "http")]
+#[test]
+fn dep_http() {
+    use http::StatusCode;
+
+    assert_eq!(
+        HttpCat::try_from(StatusCode::IM_A_TEAPOT).unwrap(),
+        HttpCat::ImATeapot,
+    );
+}
