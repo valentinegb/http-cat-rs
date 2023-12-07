@@ -27,6 +27,7 @@ use std::io::Cursor;
 use image::{DynamicImage, ImageError, ImageFormat};
 use thiserror::Error;
 
+/// A HTTP status code that correlates to a silly image of a cat.
 #[repr(u16)]
 #[derive(Debug, PartialEq, Eq)]
 pub enum HttpCat {
@@ -107,6 +108,8 @@ pub enum HttpCat {
 }
 
 impl HttpCat {
+    /// Get the cat image that correlates to this HTTP status code. (Always
+    /// JPEG.)
     pub async fn get(self) -> Result<DynamicImage, Error> {
         let mut image = image::io::Reader::new(Cursor::new(
             reqwest::get(format!("https://http.cat/{}", self as u16))
@@ -241,6 +244,7 @@ impl TryFrom<rocket::http::Status> for HttpCat {
     }
 }
 
+/// The error possibly returned by [`HttpCat::get()`].
 #[derive(Error, Debug)]
 pub enum Error {
     #[error(transparent)]
